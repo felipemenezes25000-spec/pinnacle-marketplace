@@ -56,6 +56,7 @@ function Home() {
     .slice()
     .sort((a, b) => b.reviews - a.reviews)
     .slice(0, 8);
+  const featured = populares[0];
   const cheapest = Math.min(...products.map((p) => p.price));
 
   return (
