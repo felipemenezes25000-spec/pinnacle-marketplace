@@ -19,6 +19,14 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Já visível no primeiro quadro (conteúdo acima da dobra).
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.95) {
+      setShown(true);
+      return;
+    }
+
     if (typeof IntersectionObserver === "undefined") {
       setShown(true);
       return;
@@ -32,10 +40,15 @@ export function Reveal({
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -5% 0px", threshold: 0 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // Rede de segurança: nunca deixar conteúdo invisível.
+    const t = setTimeout(() => setShown(true), 1200);
+    return () => {
+      clearTimeout(t);
+      io.disconnect();
+    };
   }, []);
 
   return (
