@@ -143,12 +143,12 @@ function Comparar() {
                 <th className="label border-b border-hairline p-3 text-left align-top text-muted-foreground">
                   {r.label}
                 </th>
-                {compareItems.map((p, i) => (
+                {compareItems.map((p) => (
                   <td
                     key={p.slug}
                     className="border-b border-hairline p-3 align-top text-[13px] font-medium"
                   >
-                    {r.get(i)}
+                    {r.get(p)}
                   </td>
                 ))}
               </tr>
