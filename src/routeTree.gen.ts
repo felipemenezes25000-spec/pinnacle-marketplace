@@ -15,6 +15,7 @@ import { Route as CarrinhoRouteImport } from './routes/carrinho'
 import { Route as CompararRouteImport } from './routes/comparar'
 import { Route as LojaRouteImport } from './routes/loja'
 import { Route as SalvosRouteImport } from './routes/salvos'
+import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const SalvosRoute = SalvosRouteImport.update({
   path: '/salvos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProdutoSlugRoute = ProdutoSlugRouteImport.update({
+  id: '/produto/$slug',
+  path: '/produto/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/comparar': typeof CompararRoute
   '/loja': typeof LojaRoute
   '/salvos': typeof SalvosRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/comparar': typeof CompararRoute
   '/loja': typeof LojaRoute
   '/salvos': typeof SalvosRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,13 +79,27 @@ export interface FileRoutesById {
   '/comparar': typeof CompararRoute
   '/loja': typeof LojaRoute
   '/salvos': typeof SalvosRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/assistencia' | '/carrinho' | '/comparar' | '/loja' | '/salvos'
+    | '/'
+    | '/assistencia'
+    | '/carrinho'
+    | '/comparar'
+    | '/loja'
+    | '/salvos'
+    | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assistencia' | '/carrinho' | '/comparar' | '/loja' | '/salvos'
+  to:
+    | '/'
+    | '/assistencia'
+    | '/carrinho'
+    | '/comparar'
+    | '/loja'
+    | '/salvos'
+    | '/produto/$slug'
   id:
     | '__root__'
     | '/'
@@ -86,6 +108,7 @@ export interface FileRouteTypes {
     | '/comparar'
     | '/loja'
     | '/salvos'
+    | '/produto/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -95,6 +118,7 @@ export interface RootRouteChildren {
   CompararRoute: typeof CompararRoute
   LojaRoute: typeof LojaRoute
   SalvosRoute: typeof SalvosRoute
+  ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalvosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/produto/$slug': {
+      id: '/produto/$slug'
+      path: '/produto/$slug'
+      fullPath: '/produto/$slug'
+      preLoaderRoute: typeof ProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -151,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompararRoute: CompararRoute,
   LojaRoute: LojaRoute,
   SalvosRoute: SalvosRoute,
+  ProdutoSlugRoute: ProdutoSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
