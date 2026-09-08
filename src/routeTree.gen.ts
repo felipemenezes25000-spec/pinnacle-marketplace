@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssistenciaRouteImport } from './routes/assistencia'
+import { Route as CarrinhoRouteImport } from './routes/carrinho'
 import { Route as CompararRouteImport } from './routes/comparar'
 import { Route as LojaRouteImport } from './routes/loja'
 import { Route as SalvosRouteImport } from './routes/salvos'
@@ -17,6 +19,16 @@ import { Route as SalvosRouteImport } from './routes/salvos'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistenciaRoute = AssistenciaRouteImport.update({
+  id: '/assistencia',
+  path: '/assistencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarrinhoRoute = CarrinhoRouteImport.update({
+  id: '/carrinho',
+  path: '/carrinho',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompararRoute = CompararRouteImport.update({
@@ -37,12 +49,16 @@ const SalvosRoute = SalvosRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistencia': typeof AssistenciaRoute
+  '/carrinho': typeof CarrinhoRoute
   '/comparar': typeof CompararRoute
   '/loja': typeof LojaRoute
   '/salvos': typeof SalvosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistencia': typeof AssistenciaRoute
+  '/carrinho': typeof CarrinhoRoute
   '/comparar': typeof CompararRoute
   '/loja': typeof LojaRoute
   '/salvos': typeof SalvosRoute
@@ -50,20 +66,32 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistencia': typeof AssistenciaRoute
+  '/carrinho': typeof CarrinhoRoute
   '/comparar': typeof CompararRoute
   '/loja': typeof LojaRoute
   '/salvos': typeof SalvosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/comparar' | '/loja' | '/salvos'
+  fullPaths:
+    '/' | '/assistencia' | '/carrinho' | '/comparar' | '/loja' | '/salvos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/comparar' | '/loja' | '/salvos'
-  id: '__root__' | '/' | '/comparar' | '/loja' | '/salvos'
+  to: '/' | '/assistencia' | '/carrinho' | '/comparar' | '/loja' | '/salvos'
+  id:
+    | '__root__'
+    | '/'
+    | '/assistencia'
+    | '/carrinho'
+    | '/comparar'
+    | '/loja'
+    | '/salvos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistenciaRoute: typeof AssistenciaRoute
+  CarrinhoRoute: typeof CarrinhoRoute
   CompararRoute: typeof CompararRoute
   LojaRoute: typeof LojaRoute
   SalvosRoute: typeof SalvosRoute
@@ -76,6 +104,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistencia': {
+      id: '/assistencia'
+      path: '/assistencia'
+      fullPath: '/assistencia'
+      preLoaderRoute: typeof AssistenciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carrinho': {
+      id: '/carrinho'
+      path: '/carrinho'
+      fullPath: '/carrinho'
+      preLoaderRoute: typeof CarrinhoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/comparar': {
@@ -104,6 +146,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistenciaRoute: AssistenciaRoute,
+  CarrinhoRoute: CarrinhoRoute,
   CompararRoute: CompararRoute,
   LojaRoute: LojaRoute,
   SalvosRoute: SalvosRoute,
