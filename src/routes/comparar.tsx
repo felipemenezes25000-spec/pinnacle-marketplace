@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { GitCompareArrows, X } from "lucide-react";
-import { categoryName } from "@/lib/catalog";
-import { installment, money } from "@/lib/format";
+import { categoryName, installment, type Product } from "@/lib/catalog";
+import { money } from "@/lib/format";
 import { useStore } from "@/lib/store";
 import { ConditionBadge } from "@/components/product-card";
 
