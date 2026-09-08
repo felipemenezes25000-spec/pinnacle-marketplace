@@ -110,36 +110,38 @@ function Home() {
             </div>
 
             {/* card de destaque */}
-            <Reveal className="pb-10">
-              <p className="label text-white/45">Mais procurado da semana</p>
-              <Link
-                to="/produto/$slug"
-                params={{ slug: populares[0].slug }}
-                className="lift group mt-3 block overflow-hidden rounded-sm border border-white/12 bg-white/[0.03]"
-              >
-                <div className="scan-line relative overflow-hidden bg-black/20">
-                  <img
-                    src={populares[0].image}
-                    alt={populares[0].name}
-                    width={1024}
-                    height={1024}
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
-                </div>
-                <div className="p-4">
-                  <span className="label text-primary-glow">{populares[0].brand}</span>
-                  <p className="mt-1.5 text-[15px] font-semibold leading-snug">
-                    {populares[0].name}
-                  </p>
-                  <div className="mt-3 flex items-end justify-between">
-                    <span className="numeric text-2xl leading-none">
-                      {money(populares[0].price)}
-                    </span>
-                    <span className="label text-white/50">{populares[0].leadTime}</span>
+            {featured && (
+              <Reveal className="pb-10">
+                <p className="label text-white/45">Mais procurado da semana</p>
+                <Link
+                  to="/produto/$slug"
+                  params={{ slug: featured.slug }}
+                  className="lift group mt-3 block overflow-hidden rounded-sm border border-white/12 bg-white/[0.03]"
+                >
+                  <div className="scan-line relative overflow-hidden bg-black/20">
+                    <img
+                      src={featured.image}
+                      alt={featured.name}
+                      width={1024}
+                      height={1024}
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
                   </div>
-                </div>
-              </Link>
-            </Reveal>
+                  <div className="p-4">
+                    <span className="label text-primary-glow">{featured.brand}</span>
+                    <p className="mt-1.5 text-[15px] font-semibold leading-snug">
+                      {featured.name}
+                    </p>
+                    <div className="mt-3 flex items-end justify-between">
+                      <span className="numeric text-2xl leading-none">
+                        {money(featured.price)}
+                      </span>
+                      <span className="label text-white/50">{featured.leadTime}</span>
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
+            )}
           </div>
         </div>
 
