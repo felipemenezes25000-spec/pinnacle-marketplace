@@ -250,7 +250,11 @@ function Home() {
             cta="Ver seminovos"
             search={{ cond: "seminovo" as const }}
           />
-          <div className="mt-5 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            className={`mt-5 grid gap-px bg-hairline sm:grid-cols-2 ${
+              seminovos.length >= 4 ? "lg:grid-cols-4" : seminovos.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
+            }`}
+          >
             {seminovos.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
