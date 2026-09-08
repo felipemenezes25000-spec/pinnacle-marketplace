@@ -42,7 +42,7 @@ export const Route = createFileRoute("/produto/$slug")({
       ],
     };
   },
-  component: Produto;
+  component: Produto,
 });
 
 function Produto() {
