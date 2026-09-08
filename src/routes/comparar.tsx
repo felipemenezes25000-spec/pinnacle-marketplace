@@ -46,18 +46,18 @@ function Comparar() {
     );
   }
 
-  const rows: { label: string; get: (i: number) => string }[] = [
-    { label: "Condição", get: (i) => (compareItems[i].condition === "novo" ? "Novo" : "Seminovo") },
-    { label: "Marca", get: (i) => compareItems[i].brand },
-    { label: "Categoria", get: (i) => categoryName(compareItems[i].category) },
-    { label: "SKU", get: (i) => compareItems[i].sku },
-    { label: "Preço", get: (i) => money(compareItems[i].price) },
-    { label: "Parcelado", get: (i) => `12x ${money(installment(compareItems[i].price))}` },
-    { label: "Estoque", get: (i) => `${compareItems[i].stock} un` },
-    { label: "Prazo", get: (i) => compareItems[i].leadTime },
-    { label: "Garantia", get: (i) => compareItems[i].warranty },
-    { label: "Instalação", get: (i) => compareItems[i].installedBy },
-    { label: "Avaliação", get: (i) => `${compareItems[i].rating.toFixed(1)} / 5` },
+  const rows: { label: string; get: (p: Product) => string }[] = [
+    { label: "Condição", get: (p) => (p.condition === "novo" ? "Novo" : "Seminovo") },
+    { label: "Marca", get: (p) => p.brand },
+    { label: "Categoria", get: (p) => categoryName(p.category) },
+    { label: "SKU", get: (p) => p.sku },
+    { label: "Preço", get: (p) => money(p.price) },
+    { label: "Parcelado", get: (p) => `12x ${money(installment(p.price))}` },
+    { label: "Estoque", get: (p) => `${p.stock} un` },
+    { label: "Prazo", get: (p) => p.leadTime },
+    { label: "Garantia", get: (p) => p.warranty },
+    { label: "Instalação", get: (p) => p.installedBy },
+    { label: "Avaliação", get: (p) => `${p.rating.toFixed(1)} / 5` },
   ];
 
   const specLabels = Array.from(
