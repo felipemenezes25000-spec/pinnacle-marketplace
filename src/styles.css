@@ -45,6 +45,9 @@
   --color-hairline: var(--hairline);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-editorial: var(--editorial);
+  --color-blush: var(--blush);
+  --color-editorial-line: var(--editorial-line);
 
   --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
@@ -53,6 +56,7 @@
   --shadow-plate: 0 1px 0 0 var(--hairline), 0 12px 32px -20px oklch(0 0 0 / 0.35);
   --shadow-lift: 0 18px 44px -22px oklch(0 0 0 / 0.45);
   --shadow-ember: 0 12px 32px -12px oklch(0.577 0.245 27.325 / 0.5);
+  --shadow-editorial: 0 24px 70px -38px oklch(0.28 0.045 25 / 0.28);
 }
 
 :root {
@@ -93,6 +97,9 @@
   --hairline: oklch(0.885 0 0);
   --input: oklch(0.9 0 0);
   --ring: oklch(0.577 0.245 27.325);
+  --editorial: oklch(0.985 0.006 30);
+  --blush: oklch(0.965 0.018 24);
+  --editorial-line: oklch(0.89 0.012 25);
 }
 
 @layer base {
@@ -183,6 +190,15 @@
 
 @utility ember-glow {
   background: radial-gradient(60% 60% at 50% 0%, oklch(0.577 0.245 27.325 / 0.35), transparent 70%);
+}
+
+@utility home-halo {
+  background: radial-gradient(circle, oklch(0.62 0.23 26 / 0.16), oklch(0.92 0.04 24 / 0.08) 45%, transparent 72%);
+  filter: blur(2px);
+}
+
+@utility editorial-image-wash {
+  background: linear-gradient(to top, oklch(0.99 0.004 25 / 0.98) 3%, oklch(0.99 0.004 25 / 0.72) 32%, transparent 66%);
 }
 
 /* ---------- Efeitos ---------- */

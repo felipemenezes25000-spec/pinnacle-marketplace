@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ChevronRight,
@@ -27,6 +27,7 @@ const ticker = [
 ];
 
 export function SiteHeader() {
+  const isHome = useLocation().pathname === "/";
   const navigate = useNavigate();
   const { cartCount, compare, saved } = useStore();
   const [query, setQuery] = useState("");
@@ -50,10 +51,10 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-chrome text-chrome-foreground">
+    <header className={cn("sticky top-0 z-40", isHome ? "border-b border-editorial-line bg-editorial/95 text-foreground backdrop-blur-xl" : "bg-chrome text-chrome-foreground")}>
       {/* faixa de avisos */}
-      <div className="overflow-hidden border-b border-white/10 bg-black">
-        <div className="marquee-track label py-1.5 text-white/55">
+      <div className={cn("overflow-hidden border-b", isHome ? "border-editorial-line bg-blush" : "border-white/10 bg-chrome")}>
+        <div className={cn("marquee-track label py-1.5", isHome ? "text-muted-foreground" : "text-white/55")}>
           {[...ticker, ...ticker].map((t, i) => (
             <span key={i} className="flex items-center gap-2.5">
               <span className="size-1 rounded-full bg-primary" />
@@ -64,9 +65,9 @@ export function SiteHeader() {
       </div>
 
       {/* barra utilitária */}
-      <div className="hidden border-b border-white/10 lg:block">
+      <div className={cn("hidden border-b lg:block", isHome ? "border-editorial-line" : "border-white/10")}>
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-1.5">
-          <div className="label flex items-center gap-5 text-white/50">
+          <div className={cn("label flex items-center gap-5", isHome ? "text-muted-foreground" : "text-white/50")}>
             <span className="flex items-center gap-1.5">
               <Truck className="size-3" /> Frete calculado para todo o Brasil
             </span>
@@ -78,7 +79,7 @@ export function SiteHeader() {
             <a href="tel:+551137156362" className="flex items-center gap-1.5 hover:text-primary-glow">
               <Phone className="size-3" /> (11) 3715-6362
             </a>
-            <span className="text-white/20">|</span>
+            <span className={isHome ? "text-editorial-line" : "text-white/20"}>|</span>
             <a
               href="https://wa.me/5511963417994"
               target="_blank"
@@ -96,7 +97,7 @@ export function SiteHeader() {
         <button
           type="button"
           onClick={() => setMenu(true)}
-          className="press grid size-9 shrink-0 place-items-center rounded-sm border border-white/15 lg:hidden"
+          className={cn("press grid size-9 shrink-0 place-items-center rounded-full border lg:hidden", isHome ? "border-editorial-line" : "border-white/15")}
           aria-label="Abrir menu"
         >
           <Menu className="size-4" />
@@ -106,12 +107,12 @@ export function SiteHeader() {
           <span className="grid size-9 place-items-center rounded-sm bg-primary font-display text-lg font-bold leading-none text-primary-foreground shadow-ember transition-transform duration-200 group-hover:-rotate-3">
             JB
           </span>
-          <span className="label hidden text-white/45 sm:block">Odonto</span>
+          <span className={cn("label hidden sm:block", isHome ? "text-muted-foreground" : "text-white/45")}>Odonto</span>
         </Link>
 
         {/* busca */}
         <div ref={boxRef} className="relative flex-1">
-          <form onSubmit={submit} className="flex items-center gap-2 rounded-sm bg-white px-3 py-2">
+          <form onSubmit={submit} className={cn("flex items-center gap-2 px-3 py-2", isHome ? "rounded-full border border-editorial-line bg-surface" : "rounded-sm bg-surface")}>
             <Search className="size-4 shrink-0 text-muted-foreground" />
             <input
               value={query}
@@ -126,7 +127,7 @@ export function SiteHeader() {
             />
             <button
               type="submit"
-              className="label press hidden rounded-sm bg-chrome px-2.5 py-1.5 text-chrome-foreground sm:block"
+              className={cn("label press hidden px-2.5 py-1.5 sm:block", isHome ? "rounded-full bg-primary text-primary-foreground" : "rounded-sm bg-chrome text-chrome-foreground")}
             >
               Buscar
             </button>
@@ -172,7 +173,7 @@ export function SiteHeader() {
         <div className="flex shrink-0 items-center gap-1">
           <Link
             to="/comparar"
-            className="press relative grid size-9 place-items-center rounded-sm border border-white/15 hover:border-primary"
+            className={cn("press relative grid size-9 place-items-center border hover:border-primary", isHome ? "rounded-full border-editorial-line" : "rounded-sm border-white/15")}
             aria-label="Comparador"
           >
             <GitCompareArrows className="size-4" />
@@ -180,7 +181,7 @@ export function SiteHeader() {
           </Link>
           <Link
             to="/salvos"
-            className="press relative hidden size-9 place-items-center rounded-sm border border-white/15 hover:border-primary sm:grid"
+            className={cn("press relative hidden size-9 place-items-center border hover:border-primary sm:grid", isHome ? "rounded-full border-editorial-line" : "rounded-sm border-white/15")}
             aria-label="Salvos"
           >
             <Heart className="size-4" />
@@ -188,7 +189,7 @@ export function SiteHeader() {
           </Link>
           <Link
             to="/carrinho"
-            className="press relative grid size-9 place-items-center rounded-sm border border-white/15 hover:border-primary"
+            className={cn("press relative grid size-9 place-items-center border hover:border-primary", isHome ? "rounded-full border-editorial-line" : "rounded-sm border-white/15")}
             aria-label="Carrinho"
           >
             <ShoppingCart className="size-4" />
@@ -196,7 +197,7 @@ export function SiteHeader() {
           </Link>
           <Link
             to="/assistencia"
-            className="press sheen label ml-1 hidden items-center gap-1.5 rounded-sm bg-primary px-3 py-2.5 font-medium text-primary-foreground shadow-ember lg:flex"
+            className={cn("press sheen label ml-1 hidden items-center gap-1.5 bg-primary px-3 py-2.5 font-medium text-primary-foreground shadow-ember lg:flex", isHome ? "rounded-full" : "rounded-sm")}
           >
             <Wrench className="size-3.5" /> Assistência
           </Link>
@@ -204,11 +205,11 @@ export function SiteHeader() {
       </div>
 
       {/* categorias */}
-      <nav className="border-t border-white/10">
+      <nav className={cn("border-t", isHome ? "border-editorial-line" : "border-white/10")}>
         <div className="mx-auto flex max-w-[1400px] items-center gap-1 overflow-x-auto px-3 sm:px-5">
           <Link
             to="/loja"
-            className="label shrink-0 border-b-2 border-transparent px-2.5 py-2.5 text-white/70 transition-colors hover:border-primary hover:text-white"
+            className={cn("label shrink-0 border-b-2 border-transparent px-2.5 py-2.5 transition-colors hover:border-primary", isHome ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white")}
           >
             Todo o catálogo
           </Link>
@@ -217,7 +218,7 @@ export function SiteHeader() {
               key={c.slug}
               to="/loja"
               search={{ cat: c.slug }}
-              className="label shrink-0 border-b-2 border-transparent px-2.5 py-2.5 text-white/70 transition-colors hover:border-primary hover:text-white"
+              className={cn("label shrink-0 border-b-2 border-transparent px-2.5 py-2.5 transition-colors hover:border-primary", isHome ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white")}
             >
               {c.name}
             </Link>

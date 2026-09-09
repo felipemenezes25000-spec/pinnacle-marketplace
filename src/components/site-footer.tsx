@@ -1,11 +1,14 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { categories } from "@/lib/catalog";
+import { cn } from "@/lib/utils";
 
 export function SiteFooter() {
+  const isHome = useLocation().pathname === "/";
+  const muted = isHome ? "text-muted-foreground" : "text-white/75";
   return (
-    <footer className="hairgrid-dark mt-16 bg-chrome text-chrome-foreground">
+    <footer className={cn(isHome ? "bg-editorial text-foreground" : "hairgrid-dark mt-16 bg-chrome text-chrome-foreground")}>
       <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-5">
-        <div className="flex flex-col gap-8 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
+        <div className={cn("flex flex-col gap-8 border-b pb-8 md:flex-row md:items-end md:justify-between", isHome ? "border-editorial-line" : "border-white/10")}>
           <div>
             <p className="label text-primary-glow">JB Soluções Odontológicas</p>
             <h2 className="headline mt-2 max-w-lg text-3xl text-balance sm:text-4xl">
@@ -21,7 +24,7 @@ export function SiteFooter() {
             </Link>
             <Link
               to="/assistencia"
-              className="label press rounded-sm border border-white/20 px-4 py-3 font-medium hover:border-primary"
+              className={cn("label press border px-4 py-3 font-medium hover:border-primary", isHome ? "rounded-full border-editorial-line" : "rounded-sm border-white/20")}
             >
               Abrir chamado técnico
             </Link>
@@ -30,8 +33,8 @@ export function SiteFooter() {
 
         <div className="grid gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="label text-white/40">Categorias</p>
-            <ul className="mt-3 space-y-2 text-[13px] text-white/75">
+            <p className={cn("label", isHome ? "text-primary" : "text-white/40")}>Categorias</p>
+            <ul className={cn("mt-3 space-y-2 text-[13px]", muted)}>
               {categories.map((c) => (
                 <li key={c.slug}>
                   <Link
@@ -46,8 +49,8 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <p className="label text-white/40">Marketplace</p>
-            <ul className="mt-3 space-y-2 text-[13px] text-white/75">
+            <p className={cn("label", isHome ? "text-primary" : "text-white/40")}>Marketplace</p>
+            <ul className={cn("mt-3 space-y-2 text-[13px]", muted)}>
               <li>
                 <Link to="/loja" className="underline-sweep inline-block hover:text-white">
                   Todo o catálogo
@@ -75,8 +78,8 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <p className="label text-white/40">Suporte</p>
-            <ul className="mt-3 space-y-2 text-[13px] text-white/75">
+            <p className={cn("label", isHome ? "text-primary" : "text-white/40")}>Suporte</p>
+            <ul className={cn("mt-3 space-y-2 text-[13px]", muted)}>
               <li>
                 <Link to="/assistencia" className="underline-sweep inline-block hover:text-white">
                   Assistência técnica
@@ -97,12 +100,12 @@ export function SiteFooter() {
                   WhatsApp (11) 96341-7994
                 </a>
               </li>
-              <li className="text-white/50">Segunda a sexta, 8h às 18h30</li>
+              <li className={isHome ? "text-muted-foreground" : "text-white/50"}>Segunda a sexta, 8h às 18h30</li>
             </ul>
           </div>
           <div>
-            <p className="label text-white/40">Compra sem susto</p>
-            <ul className="mt-3 space-y-2 text-[13px] text-white/75">
+            <p className={cn("label", isHome ? "text-primary" : "text-white/40")}>Compra sem susto</p>
+            <ul className={cn("mt-3 space-y-2 text-[13px]", muted)}>
               <li>Nota fiscal e garantia em todo pedido</li>
               <li>Seminovos com laudo técnico</li>
               <li>Instalação por equipe própria em São Paulo</li>
@@ -111,7 +114,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="label flex flex-col gap-2 border-t border-white/10 pt-6 text-white/40 sm:flex-row sm:items-center sm:justify-between">
+        <div className={cn("label flex flex-col gap-2 border-t pt-6 sm:flex-row sm:items-center sm:justify-between", isHome ? "border-editorial-line text-muted-foreground" : "border-white/10 text-white/40")}>
           <span>JB Soluções Odontológicas · São Paulo · desde 2011</span>
           <span>
             Preços e prazos exibidos são de demonstração — confirme com a equipe antes de fechar.
