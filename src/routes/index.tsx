@@ -321,7 +321,7 @@ function QuickRail() {
     <div className="mx-auto -mt-1 max-w-[1400px] px-4 sm:px-6">
       <div className="flex snap-x gap-3 overflow-x-auto py-5">
         {items.map(({ Icon, title, text, to, search }) => (
-          <Link key={title} to={to} search={search} className="group flex min-w-[17rem] flex-1 snap-start items-center gap-4 rounded-full border border-editorial-line bg-surface px-5 py-4 transition-colors hover:border-primary/30 hover:bg-blush">
+          <Link key={title} to={to} search={search ?? {}} className="group flex min-w-[17rem] flex-1 snap-start items-center gap-4 rounded-full border border-editorial-line bg-surface px-5 py-4 transition-colors hover:border-primary/30 hover:bg-blush">
             <span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary"><Icon className="size-4" /></span>
             <span className="min-w-0"><span className="block text-sm font-semibold">{title}</span><span className="block text-xs text-muted-foreground">{text}</span></span>
             <ChevronRight className="ml-auto size-4 shrink-0 text-primary" />
