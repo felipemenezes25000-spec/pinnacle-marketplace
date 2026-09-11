@@ -370,3 +370,119 @@
     scroll-behavior: auto;
   }
 }
+
+/* ---------- Efeitos extras (redondos, claros, vermelhos) ---------- */
+
+@utility soft-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-editorial-line);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px -44px oklch(0.3 0.05 25 / 0.4);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
+  &:hover {
+    transform: translateY(-6px);
+    border-color: oklch(0.62 0.23 26 / 0.45);
+    box-shadow: 0 34px 80px -46px oklch(0.55 0.2 26 / 0.45);
+  }
+}
+
+@utility glow-ring {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(140deg, oklch(0.68 0.235 25 / 0.55), transparent 45%, oklch(0.577 0.245 27.325 / 0.35));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    padding: 1px;
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+@utility gradient-ink {
+  background: linear-gradient(100deg, var(--color-foreground) 30%, oklch(0.577 0.245 27.325) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes jb-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility float-soft {
+  animation: jb-float 7s ease-in-out infinite;
+}
+
+@keyframes jb-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@utility breathe {
+  animation: jb-breathe 8s ease-in-out infinite;
+}
+
+@keyframes jb-shimmer {
+  from {
+    background-position: -220% 0;
+  }
+  to {
+    background-position: 220% 0;
+  }
+}
+
+@utility shimmer-text {
+  background: linear-gradient(
+    100deg,
+    var(--color-foreground) 35%,
+    oklch(0.68 0.235 25) 50%,
+    var(--color-foreground) 65%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: jb-shimmer 5.5s linear infinite;
+}
+
+@utility pill {
+  border-radius: 999px;
+  border: 1px solid var(--color-editorial-line);
+  background: var(--color-surface);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    border-color: oklch(0.62 0.23 26 / 0.5);
+    background: var(--color-blush);
+    transform: translateY(-2px);
+  }
+}
