@@ -321,7 +321,7 @@ function Loja() {
       {/* painel de filtros mobile */}
       {panel && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setPanel(false)} />
+          <div className="absolute inset-0 bg-primary/20" onClick={() => setPanel(false)} />
           <div className="drawer-in absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-xl bg-surface p-4">
             <div className="flex items-center justify-between border-b border-hairline pb-3">
               <span className="headline text-xl">Filtros</span>

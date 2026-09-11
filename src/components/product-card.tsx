@@ -9,10 +9,10 @@ export function ConditionBadge({ condition }: { condition: Product["condition"] 
   return (
     <span
       className={cn(
-        "label rounded-sm px-1.5 py-1 font-medium",
+        "label rounded-full px-2.5 py-1.5 font-medium",
         condition === "novo"
-          ? "bg-chrome text-chrome-foreground"
-          : "border border-primary bg-accent text-primary-deep",
+          ? "bg-primary text-primary-foreground shadow-ember"
+          : "border border-primary/40 bg-accent text-primary-deep",
       )}
     >
       {condition === "novo" ? "Novo" : "Seminovo"}
@@ -42,7 +42,7 @@ export function ProductCard({ product, dense = false }: { product: Product; dens
   const discount = product.listPrice ? pct(product.listPrice, product.price) : 0;
 
   return (
-    <article className="plate lift group relative flex h-full flex-col overflow-hidden">
+    <article className="soft-card glow-ring group relative flex h-full flex-col overflow-hidden">
       <Link
         to="/produto/$slug"
         params={{ slug: product.slug }}
